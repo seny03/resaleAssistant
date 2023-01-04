@@ -25,17 +25,14 @@ class Database:
 
     def add_offer_link(self, link, info, desired_price=None):
         if not self.is_offer_exist(link):
-            self.cur.execute("INSERT INTO OFFERS (link, description, buy_price, sell_price, desired_price) VALUES (?, "
-                             "?, ?, ?, ?)",
-                             (link, info['description'], float(info['buy_price']), float(info['sell_price']),
-                              desired_price))
+            self.cur.execute("INSERT INTO OFFERS (link, description, cur_price, desired_price) VALUES (?, ?, ?, ?)",
+                             (link, info['description'], float(info['buy_price']), desired_price))
 
             self.conn.commit()
             return
-        self.cur.execute("UPDATE OFFERS SET description=(?), buy_price=(?), sell_price=(?), desired_price=(?) WHERE "
+        self.cur.execute("UPDATE OFFERS SET description=(?), cur_price=(?), desired_price=(?) WHERE "
                          "link=(?)",
-                         (info['description'], float(info['buy_price']), float(info['sell_price']), desired_price,
-                          link,))
+                         (info['description'], float(info['buy_price']), desired_price, link,))
         self.conn.commit()
 
     def sql2csv(self, filename='export.csv'):
@@ -70,10 +67,12 @@ if __name__ == '__main__':
     while True:
         try:
             data = input(">>").split()
+            if data[0].lower() == 'q': break
             link = data[0]
             desire_price = float(data[1])
             info = parse_link(link)
             db.add_offer_link(link, info, desire_price)
-        except Exception:
+        except Exception as e:
+            print(repr(e))
             break
     db.sql2csv()
