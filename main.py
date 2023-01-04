@@ -4,8 +4,6 @@ import pandas as pd
 import bs4
 import re
 
-aspect_ratio = 1.1609
-
 
 class Database:
     def __init__(self):
@@ -26,13 +24,13 @@ class Database:
     def add_offer_link(self, link, info, desired_price=None):
         if not self.is_offer_exist(link):
             self.cur.execute("INSERT INTO OFFERS (link, description, cur_price, desired_price) VALUES (?, ?, ?, ?)",
-                             (link, info['description'], float(info['buy_price']), desired_price))
+                             (link, info['description'], info['cur_price'], desired_price))
 
             self.conn.commit()
             return
         self.cur.execute("UPDATE OFFERS SET description=(?), cur_price=(?), desired_price=(?) WHERE "
                          "link=(?)",
-                         (info['description'], float(info['buy_price']), desired_price, link,))
+                         (info['description'], info['cur_price'], desired_price, link,))
         self.conn.commit()
 
     def sql2csv(self, filename='export.csv'):
@@ -56,9 +54,8 @@ def parse_link(link):
             data_content_soup = bs4.BeautifulSoup(data_content, 'html.parser')
             cur_price = data_content_soup.find(name='span', class_='payment-value').text
             # cur_price = float(''.join(re.findall('\d.', cur_price)))
-            cur_price = float(''.join(re.findall(r'[^а-я₽\s]', cur_price)).replace(' ', ''))
-            info['sell_price'] = round(cur_price / aspect_ratio + 0.001, 2)
-            info['buy_price'] = round(cur_price + 0.001, 2)
+            cur_price = float(''.join(re.findall(r'[0-9.]', cur_price)))
+            info['cur_price'] = round(cur_price + 0.001, 2)
     return info
 
 
