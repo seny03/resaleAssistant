@@ -44,7 +44,7 @@ class Database:
 
 
 def link2id(link):
-    return int(re.findall(r'\d{8,}', link)[0])
+    return int(re.findall(r'(\d+$)', link)[0])
 
 
 def id2link(id):
