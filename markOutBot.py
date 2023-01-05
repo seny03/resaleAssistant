@@ -1,7 +1,10 @@
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher, executor, types
+
 from bot_config import *
+from database import Database
+from parser import Parser
 
 import time
 import validators
@@ -16,11 +19,21 @@ head_link = conf['parser']['link_head']
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
+# init
+db = Database()
+parser = Parser()
+
 startup_time = time.time()
 
 
 async def warning(chat_id):
     await bot.send_message(chat_id, f"[!] Sorry, you don't have a permission to this bot. Your chat_id is {chat_id} !")
+
+
+async def add_offer(link, desired_price):
+    info = parser.parse_link(link)
+    db.add_offer(info, desired_price)
+    print(f"{info} {desired_price}")
 
 
 @dp.message_handler(commands=["start"])
@@ -41,14 +54,14 @@ async def get_message(message: types.Message):
     mes = message.text.split()
     if len(mes) != 2:
         return await message.reply("[!] Incorrect arguments")
-    link, desire_price = mes
-    desire_price = desire_price.replace(',', '.')
+    link, desired_price = mes
+    desired_price = desired_price.replace(',', '.')
     if not validators.url(link) or head_link not in link:
         return await message.reply("[!] Wrong link value")
-    if not desire_price.replace('.', '', 1).isdigit():
+    if not desired_price.replace('.', '', 1).isdigit():
         return await message.reply("[!] Wrong price value")
 
-    desire_price = float(desire_price)
+    await add_offer(link, float(desired_price))
     return await message.reply("[+] added", reply=False)
 
 
