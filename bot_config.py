@@ -1,0 +1,2 @@
+TOKEN = "TOKEN"
+ADMIN_ID = []
