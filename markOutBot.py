@@ -4,7 +4,7 @@ from aiogram import Bot, Dispatcher, executor, types
 
 from bot_config import *
 from database import Database
-from parser import Parser
+from offer_parser import Parser
 
 import time
 import validators
@@ -24,6 +24,7 @@ db = Database()
 parser = Parser()
 
 startup_time = time.time()
+offers_from_user = {x: 0 for x in ADMIN_ID}
 
 
 async def warning(chat_id):
@@ -34,6 +35,15 @@ async def add_offer(link, desired_price):
     info = parser.parse_link(link)
     db.add_offer(info, desired_price)
     print(f"{info} {desired_price}")
+
+
+async def send_answer(chat_id):
+    offers_from_user[chat_id] += 1
+    cur_offers_number = offers_from_user[chat_id]
+    await asyncio.sleep(1)
+    if offers_from_user[chat_id] == cur_offers_number:
+        await bot.send_message(chat_id, f"[+] Successfully added {cur_offers_number} offers!")
+        offers_from_user[chat_id] = 0
 
 
 @dp.message_handler(commands=["start"])
@@ -62,7 +72,7 @@ async def get_message(message: types.Message):
         return await message.reply("[!] Wrong price value")
 
     await add_offer(link, float(desired_price))
-    return await message.reply("[+] added", reply=False)
+    return await send_answer(chat_id)
 
 
 if __name__ == "__main__":
