@@ -35,3 +35,12 @@ class Database:
     def sql2csv(self):
         db_df = pd.read_sql_query("SELECT * FROM OFFERS", self.conn)
         db_df.to_csv(self.config_db['csv'], index=False)
+
+    def backup(self):
+        def progress(status, remaining, total):
+            print(f'[!] Copied {total - remaining} of {total} pages...')
+
+        bck = sqlite3.connect(self.config_db['backup_database'])
+        with bck:
+            self.conn.backup(bck, pages=1, progress=progress)
+        bck.close()
