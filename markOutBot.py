@@ -1,14 +1,15 @@
 import asyncio
+import os
+import re
 import time
 import validators
 import configparser
 import logging
 import logging.config
-import threading
 
 from aiogram import Bot, Dispatcher, executor, types
 
-from bot_config import *
+# from bot_config import *
 from database import Database
 from offer_parser import Parser
 
@@ -19,6 +20,12 @@ conf.read('config.cfg')
 head_link = conf['parser']['link_head']
 logging.config.fileConfig(conf['log']['configfile'])
 logger = logging.getLogger('bot')
+
+# config bot
+TOKEN = os.environ['TOKEN']
+_regex_id = r"(\d{5,})"
+ADMIN_ID = list(map(int, re.findall(_regex_id, conf['markOutBot']['admin_id'])))
+DB_ACCESS_ID = list(map(int, re.findall(_regex_id, conf['markOutBot']['admin_id'])))
 
 # bot init
 bot = Bot(token=TOKEN)
@@ -88,7 +95,7 @@ async def get_db_command(message: types.Message):
 
 
 @dp.message_handler(commands='get_csv')
-async def get_db_command(message: types.Message):
+async def get_csv_command(message: types.Message):
     if message.chat.id not in DB_ACCESS_ID:
         await bot.send_message(message.chat.id,
                                f"[!] You dont have access to this feature! Your chat_id is {message.chat.id}")
