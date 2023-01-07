@@ -27,6 +27,25 @@ class Database:
     def get_offers(self):
         return self.cur.execute("SELECT * FROM OFFERS;").fetchall()
 
+    def get_stats(self):
+        stats = {}
+        stats['price'] = {'max_price': 0, 'min_price': 0, 'mean_price': 0, 'good_deals': 0}
+        prices = list(map(lambda x: float(x[0]), self.cur.execute("SELECT desired_price FROM OFFERS;").fetchall()))
+        stats['quantity'] = len(prices)
+        stats['price']['max_price'] = max(prices)
+        stats['price']['min_price'] = min(prices)
+        stats['price']['mean_price'] = sum(prices) / len(prices)
+        for s, d in self.cur.execute("SELECT cur_price, desired_price FROM OFFERS;").fetchall():
+            if d-s > d*0.15:
+                stats['price']['good_deals'] += 1
+        descriptions = list(map(lambda x: x[0], self.cur.execute("SELECT description FROM OFFERS;").fetchall()))
+        stats['desc'] = {'max_length': 0, 'min_length': 0, 'mean_length': 0}
+        lengths = list(map(lambda x: len(x), descriptions))
+        stats['desc']['max_length'] = max(lengths)
+        stats['desc']['min_length'] = min(lengths)
+        stats['desc']['mean_length'] = sum(lengths) / len(lengths)
+        return stats
+
     def get_offer_by_id(self, id):
         return self.cur.execute("SELECT * FROM OFFERS WHERE id = (?)", (id,)).fetchall()
 
