@@ -1,13 +1,15 @@
+import os
 import sqlite3
 import pandas as pd
 import configparser
 import logging
 import logging.config
+from datetime import datetime
 
 
 class Database:
     def __init__(self):
-        self.config = configparser.ConfigParser()
+        self.config = configparser.RawConfigParser()
         self.config.read('config.cfg')
         self.config_db = self.config['data']
 
@@ -48,12 +50,26 @@ class Database:
         db_df.to_csv(self.config_db['csv'], index=False)
         self.logger.info(f"Database converted to csv {self.config_db['csv']}")
 
+    def check_backup(self):
+        back_path = self.config_db['backup_path']
+        backs = os.listdir(back_path)
+        backs_quantity = int(self.config_db['backup_quantity'])
+        if len(backs) >= backs_quantity:
+            remove_files = sorted(backs, key=lambda x: os.path.getctime(self.config_db['backup_path'] + x), reverse=True)[backs_quantity-1:]
+            for f in remove_files:
+                os.remove(self.config_db['backup_path'] + f)
+
+    def generate_backup_name(self):
+        name = self.config_db['backup_path'] + datetime.now().strftime(self.config_db['backup_database_pattern'])
+        return name
+
     def backup(self):
         def progress(status, remaining, total):
             self.logger.warning(f'BACKUP copied {total - remaining} of {total} pages...')
-
-        bck = sqlite3.connect(self.config_db['backup_database'])
+        self.check_backup()
+        name = self.generate_backup_name()
+        bck = sqlite3.connect(name)
         with bck:
-            self.conn.backup(bck, pages=1, progress=progress)
+            self.conn.backup(bck, pages=1000000000, progress=progress)
         bck.close()
-        self.logger.info(f"Database has been backedup to {self.config_db['backup_database']}")
+        self.logger.info(f"Database has been backedup to {name}")
