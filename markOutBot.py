@@ -4,6 +4,7 @@ import validators
 import configparser
 import logging
 import logging.config
+import threading
 
 from aiogram import Bot, Dispatcher, executor, types
 
@@ -29,6 +30,17 @@ parser = Parser()
 
 startup_time = time.time()
 offers_from_user = {x: 0 for x in ADMIN_ID}
+
+
+async def db_backuper(per_day=12):
+    delay = 24*60*60/per_day
+    while True:
+        db.backup()
+        await asyncio.sleep(delay)
+
+
+async def on_startup(x):
+  asyncio.create_task(db_backuper(int(conf['data']['backups_per_day'])))
 
 
 async def warning(chat_id, username=None):
@@ -117,4 +129,4 @@ async def get_message(message: types.Message):
 
 if __name__ == "__main__":
     logger.warning("Starting bot")
-    executor.start_polling(dp, skip_updates=False)
+    executor.start_polling(dp, skip_updates=False, on_startup=on_startup)
