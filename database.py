@@ -36,12 +36,12 @@ class Database:
             self.cur.execute("INSERT INTO OFFERS (id, description, cur_price, desired_price) VALUES (?, ?, ?, ?)",
                              (info['id'], info['description'], info['cur_price'], desired_price))
             self.conn.commit()
-            self.logger.debug(f"UPDATE offer id={info['id']}")
+            self.logger.debug(f"NEW offer id={info['id']}")
             return
         self.cur.execute("UPDATE OFFERS SET description=(?), cur_price=(?), desired_price=(?) WHERE id=(?)",
                          (info['description'], info['cur_price'], desired_price, info['id'],))
         self.conn.commit()
-        self.logger.debug(f"NEW offer id={info['id']}")
+        self.logger.debug(f"UPDATE offer id={info['id']}")
 
     def sql2csv(self):
         db_df = pd.read_sql_query("SELECT * FROM OFFERS", self.conn)

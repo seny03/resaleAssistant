@@ -47,15 +47,15 @@ async def send_answer(chat_id):
     cur_offers_number = offers_from_user[chat_id]
     await asyncio.sleep(1)
     if offers_from_user[chat_id] == cur_offers_number:
-        await bot.send_message(chat_id, f"[+] Successfully added {cur_offers_number} offers!")
-        logger.info("Successfully added {cur_offers_number} offers")
+        await bot.send_message(chat_id, f"[+] Successfully added {cur_offers_number} offer(s)!")
+        logger.info(f"Successfully added {cur_offers_number} offer(s)")
         offers_from_user[chat_id] = 0
 
 
 @dp.message_handler(commands=["start"])
 async def start_command(message: types.Message):
-    print(f'cur time: {startup_time}')
-    print(f'mes time: {(message.date.timestamp())}')
+    # print(f'cur time: {startup_time}')
+    # print(f'mes time: {(message.date.timestamp())}')
     chat_id = message.chat.id
     if chat_id not in ADMIN_ID:
         return await warning(chat_id, message.chat.username)
@@ -90,5 +90,5 @@ async def get_message(message: types.Message):
 
 
 if __name__ == "__main__":
-    # logging.basicConfig(level=logging.DEBUG)
-    executor.start_polling(dp)
+    logger.warning("Starting bot")
+    executor.start_polling(dp, skip_updates=False)
