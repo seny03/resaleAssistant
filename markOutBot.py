@@ -73,13 +73,30 @@ async def send_answer(chat_id):
 
 @dp.message_handler(commands=["start"])
 async def start_command(message: types.Message):
-    # print(f'cur time: {startup_time}')
-    # print(f'mes time: {(message.date.timestamp())}')
     chat_id = message.chat.id
     if chat_id not in ADMIN_ID:
         return await warning(chat_id, message.chat.username)
     await bot.send_message(chat_id, "[+] Successfully connected!")
     logger.debug(f"Successful login attempt from chat_id={chat_id}, username={message.chat.username}")
+
+
+@dp.message_handler(commands=["stats"])
+async def start_command(message: types.Message):
+    chat_id = message.chat.id
+    if chat_id not in ADMIN_ID:
+        return await warning(chat_id, message.chat.username)
+    stats = db.get_stats()
+    stats_message = f"Price: " \
+                    f"\n\t[+] Max price: {stats['price']['max_price']}₽" \
+                    f"\n\t[-] Min price: {stats['price']['min_price']}₽" \
+                    f"\n\t[!] Mean price: {stats['price']['mean_price']}₽" \
+                    f"\n\t[+] Good deals: {stats['price']['good_deals']}\n" \
+                    f"Description:" \
+                    f"\n\t[+] Max length: {stats['desc']['max_length']}" \
+                    f"\n\t[-] Min length: {stats['desc']['min_length']}" \
+                    f"\n\t[!] Mean length: {int(stats['desc']['mean_length'])}"
+    await bot.send_message(chat_id, stats_message)
+    logger.debug(f"Statistics has been sent chat_id={chat_id}, username={message.chat.username}")
 
 
 @dp.message_handler(commands='get_database')
