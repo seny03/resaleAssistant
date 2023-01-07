@@ -1,16 +1,16 @@
 import asyncio
+import time
+import validators
+import configparser
 import logging
+import logging.config
+
 from aiogram import Bot, Dispatcher, executor, types
 
 from bot_config import *
 from database import Database
 from offer_parser import Parser
 
-import time
-import validators
-import configparser
-import logging
-import logging.config
 
 # parse config
 conf = configparser.ConfigParser()
@@ -61,6 +61,32 @@ async def start_command(message: types.Message):
         return await warning(chat_id, message.chat.username)
     await bot.send_message(chat_id, "[+] Successfully connected!")
     logger.debug(f"Successful login attempt from chat_id={chat_id}, username={message.chat.username}")
+
+
+@dp.message_handler(commands='get_database')
+async def get_db_command(message: types.Message):
+    if message.chat.id not in DB_ACCESS_ID:
+        await bot.send_message(message.chat.id,
+                               f"[!] You dont have access to this feature! Your chat_id is {message.chat.id}")
+        logger.warning(f"Access to DB. Permission denied chat_id={message.chat.id}")
+        return
+    file = types.InputFile(conf['data']['database'])
+    await bot.send_document(message.chat.id, file, protect_content=True)
+    logger.info(f"Access to DB chat_id={message.chat.id}. DB has been sent!")
+
+
+@dp.message_handler(commands='get_csv')
+async def get_db_command(message: types.Message):
+    if message.chat.id not in DB_ACCESS_ID:
+        await bot.send_message(message.chat.id,
+                               f"[!] You dont have access to this feature! Your chat_id is {message.chat.id}")
+        logger.warning(f"Access to DB. Permission denied chat_id={message.chat.id}")
+        return
+    db.sql2csv()
+    await asyncio.sleep(1)
+    file = types.InputFile(conf['data']['csv'])
+    await bot.send_document(message.chat.id, file, protect_content=True)
+    logger.info(f"Access to DB chat_id={message.chat.id}. DB has been converted to CSV!")
 
 
 @dp.message_handler()
