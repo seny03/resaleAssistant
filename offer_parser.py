@@ -35,3 +35,9 @@ class Parser:
                 cur_price = float(''.join(re.findall(r'[0-9.,]', cur_price)))
                 info['cur_price'] = round(cur_price + 0.001, 2)
         return info
+
+    def get_from_lots(self, lot_link):
+        response = requests.get(lot_link)
+        soup = bs4.BeautifulSoup(response.content, 'html.parser')
+        offers = set(map(lambda x: x.get('href'), soup.find_all(name='a', class_='tc-item')))
+        return offers
