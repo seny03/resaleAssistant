@@ -86,16 +86,17 @@ async def start_command(message: types.Message):
     if chat_id not in ADMIN_ID:
         return await warning(chat_id, message.chat.username)
     stats = db.get_stats()
-    stats_message = f"Price: " \
+    stats_message = f"<b>Quantity: {stats['quantity']}</b>\n" \
+                    f"<b>\nPrice: </b>" \
                     f"\n\t[+] Max price: {stats['price']['max_price']}₽" \
                     f"\n\t[-] Min price: {stats['price']['min_price']}₽" \
                     f"\n\t[!] Mean price: {stats['price']['mean_price']}₽" \
                     f"\n\t[+] Good deals: {stats['price']['good_deals']}\n" \
-                    f"Description:" \
+                    f"<b>\nDescription: </b>" \
                     f"\n\t[+] Max length: {stats['desc']['max_length']}" \
                     f"\n\t[-] Min length: {stats['desc']['min_length']}" \
                     f"\n\t[!] Mean length: {int(stats['desc']['mean_length'])}"
-    await bot.send_message(chat_id, stats_message)
+    await bot.send_message(chat_id, stats_message, parse_mode='html')
     logger.debug(f"Statistics has been sent chat_id={chat_id}, username={message.chat.username}")
 
 

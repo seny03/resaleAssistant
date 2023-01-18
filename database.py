@@ -29,6 +29,7 @@ class Database:
 
     def get_stats(self):
         stats = {}
+        stats['quantity'] = len(self.get_offers())
         stats['price'] = {'max_price': 0, 'min_price': 0, 'mean_price': 0, 'good_deals': 0}
         prices = list(map(lambda x: float(x[0]), self.cur.execute("SELECT desired_price FROM OFFERS;").fetchall()))
         stats['quantity'] = len(prices)
