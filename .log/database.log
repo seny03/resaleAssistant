@@ -1,4 +1,0 @@
-19-01-2023 11:12:30  DEBUG:db:Connected to database database.sqlite
-19-01-2023 11:13:16  DEBUG:db:Connected to database ./data/database.sqlite
-19-01-2023 11:13:16  DEBUG:db:Executed init script
-19-01-2023 11:13:55  INFO:db:Database converted to csv ./data/export.csv
