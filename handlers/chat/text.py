@@ -1,9 +1,10 @@
 from loader import *
+from data import LINK_HEAD
 from filters import isAdmin, isUser, haveDbAccess
 import validators
 
 
-@dp.message_handler(isUser())
+@dp.message_handler(isUser(), content_types=['text'])
 async def get_message(message: types.Message):
     chat_id = message.chat.id
     mes = message.text.split()
@@ -13,7 +14,7 @@ async def get_message(message: types.Message):
         return
     link, desired_price = mes
     desired_price = desired_price.replace(',', '.')
-    if not validators.url(link) or head_link not in link:
+    if not validators.url(link) or LINK_HEAD not in link:
         await message.reply("[!] Wrong link value")
         logger.warning(f'Wrong link value chat_id={chat_id}')
         return
@@ -21,7 +22,6 @@ async def get_message(message: types.Message):
         await message.reply("[!] Wrong price value")
         logger.warning(f'Wrong price value chat_id={chat_id}')
         return
-
     await add_offer(link, float(desired_price))
     await send_answer(chat_id)
     return
