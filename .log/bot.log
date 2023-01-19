@@ -1,0 +1,5 @@
+19-01-2023 11:13:16  WARNING:bot:Starting bot
+19-01-2023 11:13:31  DEBUG:bot:Successful login attempt from chat_id=509323092, username=caxapok1python
+19-01-2023 11:13:49  INFO:bot:Access to DB chat_id=509323092. DB has been sent!
+19-01-2023 11:13:56  INFO:bot:Access to DB chat_id=509323092. DB has been converted to CSV!
+19-01-2023 11:14:00  DEBUG:bot:Statistics has been sent chat_id=509323092, username=caxapok1python

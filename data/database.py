@@ -1,26 +1,22 @@
-import os
 import sqlite3
 import pandas as pd
-import configparser
 import logging
 import logging.config
 from datetime import datetime
 
+from .config import *
+
 
 class Database:
     def __init__(self):
-        self.config = configparser.RawConfigParser()
-        self.config.read('config.cfg')
-        self.config_db = self.config['data']
-
-        logging.config.fileConfig(self.config['log']['configfile'])
+        logging.config.fileConfig(LOG_CONFIGFILE)
         self.logger = logging.getLogger('db')
 
-        self.conn = sqlite3.connect(self.config_db['database'])
+        self.conn = sqlite3.connect(DATABASE_FILENAME)
         self.cur = self.conn.cursor()
-        self.logger.debug(f"Connected to database {self.config_db['database']}")
+        self.logger.debug(f"Connected to database {DATABASE_FILENAME}")
         # init database
-        self.cur.executescript(open(self.config_db['init_database'], 'r').read())
+        self.cur.executescript(open(DB_INIT_FILE, 'r').read())
         self.conn.commit()
         self.logger.debug(f"Executed init script")
 
@@ -67,20 +63,19 @@ class Database:
 
     def sql2csv(self):
         db_df = pd.read_sql_query("SELECT * FROM OFFERS", self.conn)
-        db_df.to_csv(self.config_db['csv'], index=False)
-        self.logger.info(f"Database converted to csv {self.config_db['csv']}")
+        db_df.to_csv(DATABASE_CSV, index=False)
+        self.logger.info(f"Database converted to csv {DATABASE_CSV}")
 
     def check_backup(self):
-        back_path = self.config_db['backup_path']
-        backs = os.listdir(back_path)
-        backs_quantity = int(self.config_db['backup_quantity'])
+        backs = os.listdir(BACKUP_PATH)
+        backs_quantity = int(BACKUP_QUANTITY)
         if len(backs) >= backs_quantity:
-            remove_files = sorted(backs, key=lambda x: os.path.getctime(self.config_db['backup_path'] + x), reverse=True)[backs_quantity-1:]
+            remove_files = sorted(backs, key=lambda x: os.path.getctime(BACKUP_PATH + x), reverse=True)[backs_quantity-1:]
             for f in remove_files:
-                os.remove(self.config_db['backup_path'] + f)
+                os.remove(BACKUP_PATH + f)
 
     def generate_backup_name(self):
-        name = self.config_db['backup_path'] + datetime.now().strftime(self.config_db['backup_database_pattern'])
+        name = BACKUP_PATH + datetime.now().strftime(BACKUP_DB_PATTERN)
         return name
 
     def backup(self):

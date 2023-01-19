@@ -1,14 +1,12 @@
 import requests
 import bs4
-import re
-import configparser
+from .config import *
 
 
 class Parser:
     def __init__(self):
         self.config = configparser.ConfigParser()
-        self.config.read('config.cfg')
-        self.head_offer_link = self.config['parser']['link_head']
+        self.head_offer_link = LINK_HEAD
 
     def link2id(self, link):
         return int(re.findall(r'(\d+$)', link)[0])
