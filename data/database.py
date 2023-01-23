@@ -3,7 +3,7 @@ import pandas as pd
 import logging
 import logging.config
 from datetime import datetime
-
+import time
 from .config import *
 
 
@@ -49,15 +49,24 @@ class Database:
     def is_offer_exist(self, id):
         return bool(len(self.get_offer_by_id(id)))
 
+    def time2timestamp(self):
+        timestamp = time.time()
+        date_time = datetime.fromtimestamp(timestamp)
+        str_date_time = date_time.strftime(DB_TIMESTAMP_FORMAT)
+        return str_date_time
+
+    def timestamp2time(self, timestamp):
+        return datetime.timestamp(datetime.strptime(timestamp, DB_TIMESTAMP_FORMAT))
+
     def add_offer(self, info, desired_price=None):
         if not self.is_offer_exist(info['id']):
-            self.cur.execute("INSERT INTO OFFERS (id, description, cur_price, desired_price) VALUES (?, ?, ?, ?)",
-                             (info['id'], info['description'], info['cur_price'], desired_price))
+            self.cur.execute("INSERT INTO OFFERS (id, description, cur_price, desired_price, owner, timestamp) VALUES (?, ?, ?, ?, ?, ?)",
+                             (info['id'], info['description'], info['cur_price'], desired_price, info['chat_id'], self.time2timestamp()))
             self.conn.commit()
-            self.logger.debug(f"NEW offer id={info['id']}")
+            self.logger.debug(f"NEW offer id={info['id']} by chat_id={info['chat_id']}")
             return
-        self.cur.execute("UPDATE OFFERS SET description=(?), cur_price=(?), desired_price=(?) WHERE id=(?)",
-                         (info['description'], info['cur_price'], desired_price, info['id'],))
+        self.cur.execute("UPDATE OFFERS SET description=(?), cur_price=(?), desired_price=(?), owner=(?), timestamp=(?) WHERE id=(?)",
+                         (info['description'], info['cur_price'], info['chat_id'], self.time2timestamp(), desired_price, info['id'],))
         self.conn.commit()
         self.logger.debug(f"UPDATE offer id={info['id']}")
 

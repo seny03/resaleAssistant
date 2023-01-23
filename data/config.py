@@ -18,6 +18,7 @@ BACKUP_QUANTITY = int(configfile['data']['backup_quantity'])
 BACKUP_PER_DAY = int(configfile['data']['backups_per_day'])
 DATABASE_CSV = configfile['data']['csv']
 DB_INIT_FILE = configfile['data']['init_database']
+DB_TIMESTAMP_FORMAT = configfile['data']['timestamp_format']
 
 # ADMINS
 USER_ID = set(map(int, re.findall(_regex_chat_id, configfile['markOutBot']['user_id'])))
