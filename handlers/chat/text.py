@@ -22,6 +22,6 @@ async def get_message(message: types.Message):
         await message.reply("[!] Wrong price value")
         logger.warning(f'Wrong price value chat_id={chat_id}')
         return
-    await add_offer(link, float(desired_price))
+    await add_offer(link, float(desired_price), message.chat.id)
     await send_answer(chat_id)
     return

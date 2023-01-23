@@ -23,8 +23,9 @@ logging.config.fileConfig(LOG_CONFIGFILE)
 logger = logging.getLogger('bot')
 
 
-async def add_offer(link, desired_price):
+async def add_offer(link, desired_price, chat_id):
     info = parser.parse_link(link)
+    info['chat_id'] = chat_id
     db.add_offer(info, desired_price)
     logger.debug(f"ADD offer {info['id']}")
 
