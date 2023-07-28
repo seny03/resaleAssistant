@@ -1,7 +1,0 @@
-pandas~=1.4.3
-termcolor~=1.1.0
-validators~=0.20.0
-aiogram~=2.20
-requests~=2.27.1
-bs4~=0.0.1
-beautifulsoup4~=4.11.1
