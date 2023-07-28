@@ -1,0 +1,45 @@
+version: "3.0"
+services:
+  parser:
+    build: ./parser/.
+    container_name: parser
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=database
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    links:
+      - redis
+#      - db
+#  tgbot:
+#    build: ./tgbot/.
+#    container_name: tgbot
+#    environment:
+#      - TOKEN=token
+#      - ADMINS=
+#    links:
+#      - redis
+
+#  database:
+#    image: mariadb
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=password
+#      - MYSQL_DATABASE=database
+#      - MYSQL_USER=user
+#      - MYSQL_PASSWORD=password
+#    volumes:
+#      - ./database/.:/var/lib/mysql
+#    ports:
+#      - "3306:3306"
+
+  redis:
+    image: redis:6.2-alpine
+    container_name: redis
+    command: redis-server --loglevel warning
+    volumes:
+      - ./redis/.:/data
+    expose:
+      - '6379'
+    restart: always
