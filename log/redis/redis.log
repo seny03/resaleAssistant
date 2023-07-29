@@ -1,0 +1,109 @@
+1:M 29 Jul 2023 22:45:41.064 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:45:41.065 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:45:46.154 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:45:46.156 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:45:51.256 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:45:51.258 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:45:56.362 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:45:56.363 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:46:01.447 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:46:01.449 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:46:06.560 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:46:06.561 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:46:11.674 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:46:11.676 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:46:16.796 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:46:16.797 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:46:21.914 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:46:21.916 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:46:27.036 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:46:27.037 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:46:32.146 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:46:32.147 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:46:37.256 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:46:37.257 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:46:42.372 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:46:42.373 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:46:47.477 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:46:47.478 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:46:52.590 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:46:52.592 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:46:57.711 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:46:57.713 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:47:02.821 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:47:02.823 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:47:07.941 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:47:07.943 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:47:13.055 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:47:13.055 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:47:18.150 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:47:18.151 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:47:23.248 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:47:23.251 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:47:28.361 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:47:28.363 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:47:33.469 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:47:33.470 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:47:38.558 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:47:38.559 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:47:43.670 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:47:43.672 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:47:48.786 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:47:48.787 . 1 clients connected (0 replicas), 890808 bytes in use
+1:M 29 Jul 2023 22:47:53.910 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:47:53.913 . 1 clients connected (0 replicas), 890808 bytes in use
+1:signal-handler (1690670875) Received SIGTERM scheduling shutdown...
+1:M 29 Jul 2023 22:47:55.241 # User requested shutdown...
+1:M 29 Jul 2023 22:47:55.241 * Saving the final RDB snapshot before exiting.
+1:M 29 Jul 2023 22:47:55.245 * DB saved on disk
+1:M 29 Jul 2023 22:47:55.246 # Redis is now ready to exit, bye bye...
+1:C 29 Jul 2023 22:48:14.807 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:C 29 Jul 2023 22:48:14.807 # Redis version=6.2.13, bits=64, commit=00000000, modified=0, pid=1, just started
+1:C 29 Jul 2023 22:48:14.808 # Configuration loaded
+1:M 29 Jul 2023 22:48:14.808 * monotonic clock: POSIX clock_gettime
+1:M 29 Jul 2023 22:48:14.809 * Running mode=standalone, port=6379.
+1:M 29 Jul 2023 22:48:14.810 # Server initialized
+1:M 29 Jul 2023 22:48:14.813 * Loading RDB produced by version 6.2.13
+1:M 29 Jul 2023 22:48:14.813 * RDB age 19 seconds
+1:M 29 Jul 2023 22:48:14.815 * RDB memory usage when created 0.85 Mb
+1:M 29 Jul 2023 22:48:14.815 # Done loading RDB, keys loaded: 17, keys expired: 0.
+1:M 29 Jul 2023 22:48:14.816 * DB loaded from disk: 0.003 seconds
+1:M 29 Jul 2023 22:48:14.816 * Ready to accept connections
+1:M 29 Jul 2023 22:48:14.816 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:48:14.817 . 0 clients connected (0 replicas), 869872 bytes in use
+1:M 29 Jul 2023 22:48:19.936 - DB 0: 17 keys (0 volatile) in 32 slots HT.
+1:M 29 Jul 2023 22:48:19.938 . 0 clients connected (0 replicas), 869872 bytes in use
+1:M 29 Jul 2023 22:48:24.308 - Accepted 172.27.0.1:35922
+1:M 29 Jul 2023 22:48:24.338 * DB saved on disk
+1:M 29 Jul 2023 22:48:25.023 . 1 clients connected (0 replicas), 865656 bytes in use
+1:M 29 Jul 2023 22:48:28.167 - Client closed connection
+1:M 29 Jul 2023 22:48:30.113 - DB 0: 3 keys (0 volatile) in 4 slots HT.
+1:M 29 Jul 2023 22:48:30.114 . 0 clients connected (0 replicas), 850672 bytes in use
+1:M 29 Jul 2023 22:48:35.224 - DB 0: 3 keys (0 volatile) in 4 slots HT.
+1:M 29 Jul 2023 22:48:35.225 . 0 clients connected (0 replicas), 850672 bytes in use
+1:M 29 Jul 2023 22:48:40.348 - DB 0: 3 keys (0 volatile) in 4 slots HT.
+1:M 29 Jul 2023 22:48:40.349 . 0 clients connected (0 replicas), 850672 bytes in use
+1:M 29 Jul 2023 22:48:45.464 - DB 0: 3 keys (0 volatile) in 4 slots HT.
+1:M 29 Jul 2023 22:48:45.466 . 0 clients connected (0 replicas), 850672 bytes in use
+1:M 29 Jul 2023 22:48:50.547 - DB 0: 3 keys (0 volatile) in 4 slots HT.
+1:M 29 Jul 2023 22:48:50.549 . 0 clients connected (0 replicas), 850672 bytes in use
+1:M 29 Jul 2023 22:48:55.655 - DB 0: 3 keys (0 volatile) in 4 slots HT.
+1:M 29 Jul 2023 22:48:55.656 . 0 clients connected (0 replicas), 850672 bytes in use
+1:M 29 Jul 2023 22:49:00.741 - DB 0: 3 keys (0 volatile) in 4 slots HT.
+1:M 29 Jul 2023 22:49:00.745 . 0 clients connected (0 replicas), 850672 bytes in use
+1:M 29 Jul 2023 22:49:05.848 - DB 0: 3 keys (0 volatile) in 4 slots HT.
+1:M 29 Jul 2023 22:49:05.849 . 0 clients connected (0 replicas), 850672 bytes in use
+1:M 29 Jul 2023 22:49:10.948 - DB 0: 3 keys (0 volatile) in 4 slots HT.
+1:M 29 Jul 2023 22:49:10.949 . 0 clients connected (0 replicas), 850672 bytes in use
+1:M 29 Jul 2023 22:49:16.062 - DB 0: 3 keys (0 volatile) in 4 slots HT.
+1:M 29 Jul 2023 22:49:16.064 . 0 clients connected (0 replicas), 850672 bytes in use
+1:M 29 Jul 2023 22:49:21.180 - DB 0: 3 keys (0 volatile) in 4 slots HT.
+1:M 29 Jul 2023 22:49:21.182 . 0 clients connected (0 replicas), 850672 bytes in use
+1:M 29 Jul 2023 22:49:26.289 - DB 0: 3 keys (0 volatile) in 4 slots HT.
+1:M 29 Jul 2023 22:49:26.290 . 0 clients connected (0 replicas), 850672 bytes in use
+1:M 29 Jul 2023 22:49:31.397 - DB 0: 3 keys (0 volatile) in 4 slots HT.
+1:M 29 Jul 2023 22:49:31.398 . 0 clients connected (0 replicas), 850672 bytes in use
+1:M 29 Jul 2023 22:49:36.501 - DB 0: 3 keys (0 volatile) in 4 slots HT.
+1:M 29 Jul 2023 22:49:36.502 . 0 clients connected (0 replicas), 850672 bytes in use
+1:M 29 Jul 2023 22:49:41.622 - DB 0: 3 keys (0 volatile) in 4 slots HT.
+1:M 29 Jul 2023 22:49:41.623 . 0 clients connected (0 replicas), 850672 bytes in use

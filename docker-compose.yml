@@ -1,45 +1,56 @@
-version: "3.0"
+version: "3.8"
 services:
-  parser:
-    build: ./parser/.
-    container_name: parser
-    environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=database
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=password
-    links:
-      - redis
-#      - db
-#  tgbot:
-#    build: ./tgbot/.
-#    container_name: tgbot
-#    environment:
-#      - TOKEN=token
-#      - ADMINS=
-#    links:
-#      - redis
+    parser:
+        build: ./parser/.
+        container_name: parser
+        environment:
+            - REDIS_HOST=redis
+            - REDIS_PORT=6379
+            - MYSQL_HOST=database
+            - MYSQL_PORT=3306
+            - MYSQL_ROOT_PASSWORD=password
+            - MYSQL_DATABASE=database
+            - PARSE_TIMEOUT=900
+        volumes:
+            - ./log:/log
+        links:
+            - redis
+            - database
 
-#  database:
-#    image: mariadb
-#    environment:
-#      - MYSQL_ROOT_PASSWORD=password
-#      - MYSQL_DATABASE=database
-#      - MYSQL_USER=user
-#      - MYSQL_PASSWORD=password
-#    volumes:
-#      - ./database/.:/var/lib/mysql
-#    ports:
-#      - "3306:3306"
+    tgbot:
+        build: ./tgbot/.
+        container_name: tgbot
+        environment:
+            - TOKEN=
+            - ADMINS=
+            - REDIS_HOST=redis
+            - REDIS_PORT=6379
+        links:
+            - redis
 
-  redis:
-    image: redis:6.2-alpine
-    container_name: redis
-    command: redis-server --loglevel warning
-    volumes:
-      - ./redis/.:/data
-    expose:
-      - '6379'
-    restart: always
+    database:
+        image: mariadb
+        container_name: database
+        environment:
+            - MYSQL_ROOT_PASSWORD=password
+            - MYSQL_DATABASE=database
+            - MYSQL_USER=user
+            - MYSQL_PASSWORD=password
+        volumes:
+            - ./database/.:/var/lib/mysql
+            - ./database/my.ini:/etc/mysql/conf.d/my.cnf
+            - ./log/database:/log
+        ports:
+            - "3306:3306"
+
+    redis:
+        image: redis:6.2-alpine
+        container_name: redis
+        command: redis-server /conf/redis.conf
+        volumes:
+            - ./redis/redis.ini:/conf/redis.conf
+            - ./redis:/data
+            - ./log/redis:/log
+        ports:
+            - "6379:6379"
+        restart: always
