@@ -13,9 +13,13 @@ services:
             - PARSE_TIMEOUT=900
         volumes:
             - ./log:/log
+            - ./parser:/app
         links:
             - redis
             - database
+        depends_on:
+            - database
+        restart: always
 
     tgbot:
         build: ./tgbot/.
